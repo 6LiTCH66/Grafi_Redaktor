@@ -16,8 +16,12 @@ namespace Grafi_Redaktor
     {
         Point lastPoint = Point.Empty; 
         bool isMouseDown = new Boolean();
-        Graphics g;
+        Graphics g, newGraph;
         Bitmap bmp;
+        Pen mainPen;
+        private bool undoCliked = false;
+        List<Point> Lines = new List<Point>();
+
         public Form1()
         {
             InitializeComponent();
@@ -60,20 +64,56 @@ namespace Grafi_Redaktor
                     {
                         bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
-                        pictureBox1.Image = bmp; 
+                        pictureBox1.Image = bmp;
                     }
                     using (g = Graphics.FromImage(pictureBox1.Image))
                     {
-                        
 
-                        g.DrawLine(new Pen(Color.Black, trackBar1.Value), lastPoint, e.Location);
-                        g.SmoothingMode = SmoothingMode.AntiAlias;
+                        if (dotToolStripMenuItem.Checked == true)
+                        {
+                            mainPen = new Pen(Color.Black, trackBar1.Value);
+                            mainPen.DashStyle = DashStyle.Dot;
+
+                        }
+                        else if(dashToolStripMenuItem.Checked == true)
+                        {
+                            mainPen = new Pen(Color.Black, trackBar1.Value);
+                            mainPen.DashStyle = DashStyle.DashDotDot;
+                            
+                        }
+                        else if(solidToolStripMenuItem.Checked == true)
+                        {
+                            mainPen = new Pen(Color.Black, trackBar1.Value);
+                            mainPen.DashStyle = DashStyle.Solid;
+                        }
+
+                        else
+                        {
+                            mainPen = new Pen(Color.Black, trackBar1.Value);
+                        }
+                        
+                        g.DrawLine(mainPen, lastPoint, e.Location);
+
+                        
 
                     }
 
+                    
                     pictureBox1.Invalidate();
 
                     lastPoint = e.Location;
+
+                    Lines.Add(lastPoint);
+
+                    if (undoCliked == true)
+                    {
+                        Lines.RemoveAt(Lines.Count - 1);
+                    }
+
+
+
+
+
 
                 }
             }
@@ -128,6 +168,34 @@ namespace Grafi_Redaktor
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+
+        private void dotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            solidToolStripMenuItem.Checked = false;
+            dashToolStripMenuItem.Checked = false;
+            dotToolStripMenuItem.Checked = true;
+        }
+
+        private void dashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            solidToolStripMenuItem.Checked = false;
+            dotToolStripMenuItem.Checked = false;
+            dashToolStripMenuItem.Checked = true;
+        }
+
+        private void solidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dotToolStripMenuItem.Checked = false;
+            dashToolStripMenuItem.Checked = false;
+            solidToolStripMenuItem.Checked = true;
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            undoCliked = true;
+            
         }
     }
 }
