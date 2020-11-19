@@ -132,6 +132,7 @@
             this.rendoToolStripMenuItem.Name = "rendoToolStripMenuItem";
             this.rendoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rendoToolStripMenuItem.Text = "Redo";
+            this.rendoToolStripMenuItem.Click += new System.EventHandler(this.rendoToolStripMenuItem_Click);
             // 
             // penToolStripMenuItem
             // 
@@ -156,21 +157,21 @@
             // solidToolStripMenuItem
             // 
             this.solidToolStripMenuItem.Name = "solidToolStripMenuItem";
-            this.solidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.solidToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.solidToolStripMenuItem.Text = "Solid";
             this.solidToolStripMenuItem.Click += new System.EventHandler(this.solidToolStripMenuItem_Click);
             // 
             // dotToolStripMenuItem
             // 
             this.dotToolStripMenuItem.Name = "dotToolStripMenuItem";
-            this.dotToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dotToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.dotToolStripMenuItem.Text = "Dot";
             this.dotToolStripMenuItem.Click += new System.EventHandler(this.dotToolStripMenuItem_Click);
             // 
             // dashToolStripMenuItem
             // 
             this.dashToolStripMenuItem.Name = "dashToolStripMenuItem";
-            this.dashToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dashToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.dashToolStripMenuItem.Text = "DashDotDot";
             this.dashToolStripMenuItem.Click += new System.EventHandler(this.dashToolStripMenuItem_Click);
             // 
@@ -180,6 +181,7 @@
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 

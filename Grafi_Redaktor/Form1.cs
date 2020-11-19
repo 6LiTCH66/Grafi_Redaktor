@@ -16,16 +16,22 @@ namespace Grafi_Redaktor
     {
         Point lastPoint = Point.Empty; 
         bool isMouseDown = new Boolean();
-        Graphics g, newGraph;
+        Graphics g;
         Bitmap bmp;
         Pen mainPen;
-        private bool undoCliked = false;
         List<Point> Lines = new List<Point>();
+
+        int historyCounter;
+        GraphicsPath currentPath;
+        List<Image> History;
+        Color color1;
+
+
 
         public Form1()
         {
-            InitializeComponent();
-            
+            History = new List<Image>();
+            InitializeComponent();  
 
         }
         void SaveFile()
@@ -51,6 +57,7 @@ namespace Grafi_Redaktor
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             lastPoint = e.Location;
+            currentPath = new GraphicsPath();
 
             isMouseDown = true;
         }
@@ -66,64 +73,56 @@ namespace Grafi_Redaktor
 
                         pictureBox1.Image = bmp;
                     }
-                    using (g = Graphics.FromImage(pictureBox1.Image))
-                    {
-
-                        if (dotToolStripMenuItem.Checked == true)
-                        {
-                            mainPen = new Pen(Color.Black, trackBar1.Value);
-                            mainPen.DashStyle = DashStyle.Dot;
-
-                        }
-                        else if(dashToolStripMenuItem.Checked == true)
-                        {
-                            mainPen = new Pen(Color.Black, trackBar1.Value);
-                            mainPen.DashStyle = DashStyle.DashDotDot;
-                            
-                        }
-                        else if(solidToolStripMenuItem.Checked == true)
-                        {
-                            mainPen = new Pen(Color.Black, trackBar1.Value);
-                            mainPen.DashStyle = DashStyle.Solid;
-                        }
-
-                        else
-                        {
-                            mainPen = new Pen(Color.Black, trackBar1.Value);
-                        }
-                        
-                        g.DrawLine(mainPen, lastPoint, e.Location);
-
-                        
-
-                    }
-
+                    color1 = Color.Black;
+                    mainPen = new Pen(color1, trackBar1.Value);
                     
-                    pictureBox1.Invalidate();
 
-                    lastPoint = e.Location;
-
-                    Lines.Add(lastPoint);
-
-                    if (undoCliked == true)
+                    if (dotToolStripMenuItem.Checked == true)
                     {
-                        Lines.RemoveAt(Lines.Count - 1);
+                        mainPen.DashStyle = DashStyle.Dot;
+
+                    }
+                    else if(dashToolStripMenuItem.Checked == true)
+                    {
+                        mainPen.DashStyle = DashStyle.DashDotDot;
+                            
+                    }
+                    else if(solidToolStripMenuItem.Checked == true)
+                    {
+                        mainPen.DashStyle = DashStyle.Solid;
                     }
 
-
-
-
-
-
+                    g = Graphics.FromImage(pictureBox1.Image);
+                    currentPath.AddLine(lastPoint, e.Location);
+                    g.DrawPath(mainPen, currentPath);
+                    lastPoint = e.Location;
+                    g.Dispose();
+                    pictureBox1.Invalidate();
                 }
             }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            
+            lastPoint = Point.Empty;
+            History.Add(new Bitmap(pictureBox1.Image));
+            History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
+            
+            if (historyCounter + 1 < 10) historyCounter++;
+            if (History.Count - 1 == 10) History.RemoveAt(0);
+
             isMouseDown = false;
 
-            lastPoint = Point.Empty;
+            try
+            {
+                currentPath.Dispose();
+
+            }
+            catch
+            {
+
+            };
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,7 +142,15 @@ namespace Grafi_Redaktor
             else if (dr == DialogResult.Yes)
             {
                 SaveFile();
+                History.Clear();
+                historyCounter = 1;
+                Bitmap pic = new Bitmap(750, 500);
+                pictureBox1.Image = pic;
+                History.Add(new Bitmap(pictureBox1.Image));
             }
+
+            
+            
            
         }
 
@@ -176,6 +183,7 @@ namespace Grafi_Redaktor
             solidToolStripMenuItem.Checked = false;
             dashToolStripMenuItem.Checked = false;
             dotToolStripMenuItem.Checked = true;
+
         }
 
         private void dashToolStripMenuItem_Click(object sender, EventArgs e)
@@ -183,6 +191,7 @@ namespace Grafi_Redaktor
             solidToolStripMenuItem.Checked = false;
             dotToolStripMenuItem.Checked = false;
             dashToolStripMenuItem.Checked = true;
+
         }
 
         private void solidToolStripMenuItem_Click(object sender, EventArgs e)
@@ -194,8 +203,36 @@ namespace Grafi_Redaktor
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            undoCliked = true;
+            if(History.Count != 0 && historyCounter != 0)
+            {
+                pictureBox1.Image = new Bitmap(History[--historyCounter]);
+            }
+            else
+            {
+                MessageBox.Show("История пуста");
+            }
             
         }
+
+        private void rendoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (historyCounter < History.Count - 1)
+            {
+                pictureBox1.Image = new Bitmap(History[++historyCounter]);
+            }
+            else
+            {
+                MessageBox.Show("История пуста");
+            }
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2(color1);
+            f.Owner = this;
+            f.ShowDialog();
+
+        }
+        
     }
 }
