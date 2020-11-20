@@ -31,7 +31,7 @@ namespace Grafi_Redaktor
         public Form1()
         {
             History = new List<Image>();
-            InitializeComponent();  
+            InitializeComponent();
 
         }
         void SaveFile()
@@ -54,6 +54,36 @@ namespace Grafi_Redaktor
                 pictureBox1.Image.Save(sfd.FileName, format);
             }
         }
+        void OpenFile()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.ShowDialog();
+            pictureBox1.ImageLocation = op.FileName;
+        }
+
+        void NewFile()
+        {
+            DialogResult dr = MessageBox.Show("Do you want save your Image?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.No)
+            {
+                if (pictureBox1.Image != null)
+                {
+
+                    pictureBox1.Image = null;
+
+                    Invalidate();
+                }
+            }
+            else if (dr == DialogResult.Yes)
+            {
+                SaveFile();
+                History.Clear();
+                historyCounter = 1;
+                Bitmap pic = new Bitmap(750, 500);
+                pictureBox1.Image = pic;
+                History.Add(new Bitmap(pictureBox1.Image));
+            }
+        }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             lastPoint = e.Location;
@@ -73,7 +103,15 @@ namespace Grafi_Redaktor
 
                         pictureBox1.Image = bmp;
                     }
-                    color1 = Color.Black;
+                    if(Date.Value.IsEmpty)
+                    {
+                        color1 = Color.Black;
+                    }
+                    else
+                    {
+                        color1 = Date.Value;
+                    }
+
                     mainPen = new Pen(color1, trackBar1.Value);
                     
 
@@ -127,33 +165,9 @@ namespace Grafi_Redaktor
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            DialogResult dr = MessageBox.Show("Do you want save your Image?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(dr == DialogResult.No)
-            {
-                if (pictureBox1.Image != null)
-                {
-
-                    pictureBox1.Image = null;
-
-                    Invalidate();
-                }
-            }
-            else if (dr == DialogResult.Yes)
-            {
-                SaveFile();
-                History.Clear();
-                historyCounter = 1;
-                Bitmap pic = new Bitmap(750, 500);
-                pictureBox1.Image = pic;
-                History.Add(new Bitmap(pictureBox1.Image));
-            }
-
-            
-            
-           
+            NewFile();
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             trackBar1.Minimum = 0;
@@ -167,9 +181,7 @@ namespace Grafi_Redaktor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.ShowDialog();
-            pictureBox1.ImageLocation = op.FileName;
+            OpenFile();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,10 +241,29 @@ namespace Grafi_Redaktor
         private void colorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 f = new Form2(color1);
-            f.Owner = this;
             f.ShowDialog();
+            
 
         }
-        
+
+        private void newFile_Click(object sender, EventArgs e)
+        {
+            NewFile();
+        }
+
+        private void openFile_Click(object sender, EventArgs e)
+        {
+            OpenFile();
+        }
+
+        private void saveFile1_Click(object sender, EventArgs e)
+        {
+            SaveFile();
+        }
+
+        private void exitFile_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

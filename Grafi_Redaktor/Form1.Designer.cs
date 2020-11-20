@@ -48,9 +48,15 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.newFile = new System.Windows.Forms.ToolStripButton();
+            this.openFile = new System.Windows.Forms.ToolStripButton();
+            this.saveFile1 = new System.Windows.Forms.ToolStripButton();
+            this.exitFile = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -122,7 +128,7 @@
             // 
             this.undoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("undoToolStripMenuItem.Image")));
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -130,7 +136,7 @@
             // 
             this.rendoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("rendoToolStripMenuItem.Image")));
             this.rendoToolStripMenuItem.Name = "rendoToolStripMenuItem";
-            this.rendoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rendoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.rendoToolStripMenuItem.Text = "Redo";
             this.rendoToolStripMenuItem.Click += new System.EventHandler(this.rendoToolStripMenuItem_Click);
             // 
@@ -141,7 +147,7 @@
             this.colorToolStripMenuItem});
             this.penToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("penToolStripMenuItem.Image")));
             this.penToolStripMenuItem.Name = "penToolStripMenuItem";
-            this.penToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.penToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.penToolStripMenuItem.Text = "Pen";
             // 
             // styleToolStripMenuItem
@@ -151,7 +157,7 @@
             this.dotToolStripMenuItem,
             this.dashToolStripMenuItem});
             this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
-            this.styleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.styleToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.styleToolStripMenuItem.Text = "Style";
             // 
             // solidToolStripMenuItem
@@ -179,7 +185,7 @@
             // 
             this.colorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("colorToolStripMenuItem.Image")));
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.colorToolStripMenuItem.Text = "Color";
             this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
             // 
@@ -216,22 +222,92 @@
             this.trackBar1.Size = new System.Drawing.Size(297, 45);
             this.trackBar1.TabIndex = 2;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(50, 50);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newFile,
+            this.openFile,
+            this.saveFile1,
+            this.exitFile});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.toolStrip1.Location = new System.Drawing.Point(707, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(93, 426);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // newFile
+            // 
+            this.newFile.AutoSize = false;
+            this.newFile.Checked = true;
+            this.newFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.newFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newFile.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.newFile.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.newFile.Image = ((System.Drawing.Image)(resources.GetObject("newFile.Image")));
+            this.newFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.newFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newFile.Name = "newFile";
+            this.newFile.Size = new System.Drawing.Size(91, 60);
+            this.newFile.Text = "newFile";
+            this.newFile.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            this.newFile.Click += new System.EventHandler(this.newFile_Click);
+            // 
+            // openFile
+            // 
+            this.openFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openFile.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.openFile.Image = ((System.Drawing.Image)(resources.GetObject("openFile.Image")));
+            this.openFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openFile.Name = "openFile";
+            this.openFile.Size = new System.Drawing.Size(91, 54);
+            this.openFile.Text = "openFile";
+            this.openFile.Click += new System.EventHandler(this.openFile_Click);
+            // 
+            // saveFile1
+            // 
+            this.saveFile1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveFile1.Image = ((System.Drawing.Image)(resources.GetObject("saveFile1.Image")));
+            this.saveFile1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveFile1.Name = "saveFile1";
+            this.saveFile1.Size = new System.Drawing.Size(91, 54);
+            this.saveFile1.Text = "saveFile";
+            this.saveFile1.Click += new System.EventHandler(this.saveFile1_Click);
+            // 
+            // exitFile
+            // 
+            this.exitFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exitFile.Image = ((System.Drawing.Image)(resources.GetObject("exitFile.Image")));
+            this.exitFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exitFile.Name = "exitFile";
+            this.exitFile.Size = new System.Drawing.Size(91, 54);
+            this.exitFile.Text = "exitFile";
+            this.exitFile.Click += new System.EventHandler(this.exitFile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Redactor";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +334,11 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton newFile;
+        private System.Windows.Forms.ToolStripButton openFile;
+        private System.Windows.Forms.ToolStripButton saveFile1;
+        private System.Windows.Forms.ToolStripButton exitFile;
     }
 }
 

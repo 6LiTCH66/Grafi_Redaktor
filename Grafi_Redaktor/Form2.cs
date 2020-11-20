@@ -18,6 +18,8 @@ namespace Grafi_Redaktor
         public Form2(Color color)
         {
             InitializeComponent();
+
+
             Scroll_Red.Tag = numeric_Red;
             Scroll_Green.Tag = numeric_Green;
             Scroll_Blue.Tag = numeric_Blue;
@@ -46,10 +48,14 @@ namespace Grafi_Redaktor
             scrollBar.Value = (int)numericUpDown.Value;
         }
 
+        private Color MainColor()
+        {
+            return colorResult = Color.FromArgb(Scroll_Red.Value, Scroll_Green.Value, Scroll_Blue.Value);
+        }
+
         private void UpdateColor()
         {
-            colorResult = Color.FromArgb(Scroll_Red.Value, Scroll_Green.Value, Scroll_Blue.Value);
-            picture1.BackColor = colorResult;
+            picture1.BackColor = MainColor();
 
         }
 
@@ -99,11 +105,8 @@ namespace Grafi_Redaktor
         private void button1_Click(object sender, EventArgs e)
         {
             UpdateColor();
-            Form1 main = this.Owner as Form1;
-            if(main != null)
-            {
-                Color NewColor = main.colo
-            }
+            Date.Value = MainColor();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
