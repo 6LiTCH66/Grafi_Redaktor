@@ -89,7 +89,6 @@ namespace Grafi_Redaktor
         {
             lastPoint = e.Location;
             currentPath = new GraphicsPath();
-
             isMouseDown = true;
         }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -196,7 +195,15 @@ namespace Grafi_Redaktor
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (pictureBox1.Image != null)
+            {
+                NewFile();
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
 
@@ -273,7 +280,16 @@ namespace Grafi_Redaktor
 
         private void exitFile_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if(pictureBox1.Image != null)
+            {
+                NewFile();
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
+            
         }
     }
 }
