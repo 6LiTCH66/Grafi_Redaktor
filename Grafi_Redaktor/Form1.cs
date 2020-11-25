@@ -22,10 +22,10 @@ namespace Grafi_Redaktor
         List<Point> Lines = new List<Point>();
 
         int historyCounter;
+
         GraphicsPath currentPath;
         List<Image> History;
         Color color1;
-
 
 
         public Form1()
@@ -84,6 +84,7 @@ namespace Grafi_Redaktor
                 History.Add(new Bitmap(pictureBox1.Image));
             }
         }
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             lastPoint = e.Location;
@@ -97,34 +98,43 @@ namespace Grafi_Redaktor
             {
                 if(lastPoint != null)
                 {
+                    switch (e.Button)
+                    {
+                        case MouseButtons.Left:
+                            if (Date.Value.IsEmpty)
+                            {
+                                color1 = Color.Black;
+                            }
+                            else
+                            {
+                                color1 = Date.Value;
+                            }
+                            break;
+                        case MouseButtons.Right:
+                            color1 = Color.White;
+                            break;
+                    }
+
                     if(pictureBox1.Image == null)
                     {
                         bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
                         pictureBox1.Image = bmp;
                     }
-                    if(Date.Value.IsEmpty)
-                    {
-                        color1 = Color.Black;
-                    }
-                    else
-                    {
-                        color1 = Date.Value;
-                    }
-
                     mainPen = new Pen(color1, trackBar1.Value);
                     
 
                     if (dotToolStripMenuItem.Checked == true)
                     {
                         mainPen.DashStyle = DashStyle.Dot;
-
                     }
+
                     else if(dashToolStripMenuItem.Checked == true)
                     {
                         mainPen.DashStyle = DashStyle.DashDotDot;
                             
                     }
+
                     else if(solidToolStripMenuItem.Checked == true)
                     {
                         mainPen.DashStyle = DashStyle.Solid;
@@ -240,7 +250,7 @@ namespace Grafi_Redaktor
 
         private void colorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 f = new Form2(color1);
+            Form2 f = new Form2();
             f.ShowDialog();
             
 

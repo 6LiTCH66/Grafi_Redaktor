@@ -13,9 +13,9 @@ namespace Grafi_Redaktor
     public partial class Form2 : Form
     {
         
-        Color colorResult;
-        Pen UpdatePen;
-        public Form2(Color color)
+        Color colorResult, color;
+        int colorR, colorG, colorB;
+        public Form2()
         {
             InitializeComponent();
 
@@ -33,12 +33,16 @@ namespace Grafi_Redaktor
             numeric_Red.Value = color.R;
             numeric_Green.Value = color.G;
             numeric_Blue.Value = color.B;
+
         }
         private void Scroll_Red_ValueChanged(object sender, EventArgs e)
         {
             ScrollBar scrollBar = (ScrollBar)sender;
             NumericUpDown numericUpDown = (NumericUpDown)scrollBar.Tag;
             numericUpDown.Value = scrollBar.Value;
+
+            colorR = scrollBar.Value;
+            picture1.BackColor = Color.FromArgb(colorR, colorG, colorB);
         }
 
         private void numeric_Red_ValueChanged(object sender, EventArgs e)
@@ -79,6 +83,11 @@ namespace Grafi_Redaktor
             ScrollBar scrollBar = (ScrollBar)sender;
             NumericUpDown numericUpDown = (NumericUpDown)scrollBar.Tag;
             numericUpDown.Value = scrollBar.Value;
+
+            colorG = scrollBar.Value;
+
+            picture1.BackColor = Color.FromArgb(colorR, colorG, colorB);
+
         }
 
         private void Scroll_Blue_ValueChanged(object sender, EventArgs e)
@@ -86,6 +95,9 @@ namespace Grafi_Redaktor
             ScrollBar scrollBar = (ScrollBar)sender;
             NumericUpDown numericUpDown = (NumericUpDown)scrollBar.Tag;
             numericUpDown.Value = scrollBar.Value;
+
+            colorB = scrollBar.Value;
+            picture1.BackColor = Color.FromArgb(colorR, colorG, colorB);
         }
 
         private void numeric_Green_ValueChanged(object sender, EventArgs e)
@@ -113,7 +125,7 @@ namespace Grafi_Redaktor
         {
             this.Close();
         }
-        
+
         
     }
 }
