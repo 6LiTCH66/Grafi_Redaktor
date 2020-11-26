@@ -61,6 +61,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Highlight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -265,6 +266,7 @@
             this.newFile.Size = new System.Drawing.Size(91, 60);
             this.newFile.Text = "newFile";
             this.newFile.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            this.newFile.ToolTipText = "New File";
             this.newFile.Click += new System.EventHandler(this.newFile_Click);
             // 
             // openFile
@@ -276,6 +278,7 @@
             this.openFile.Name = "openFile";
             this.openFile.Size = new System.Drawing.Size(91, 54);
             this.openFile.Text = "openFile";
+            this.openFile.ToolTipText = "Open File";
             this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
             // saveFile1
@@ -286,6 +289,7 @@
             this.saveFile1.Name = "saveFile1";
             this.saveFile1.Size = new System.Drawing.Size(91, 54);
             this.saveFile1.Text = "saveFile";
+            this.saveFile1.ToolTipText = "Save File";
             this.saveFile1.Click += new System.EventHandler(this.saveFile1_Click);
             // 
             // exitFile
@@ -296,6 +300,7 @@
             this.exitFile.Name = "exitFile";
             this.exitFile.Size = new System.Drawing.Size(91, 54);
             this.exitFile.Text = "exitFile";
+            this.exitFile.ToolTipText = "Exit";
             this.exitFile.Click += new System.EventHandler(this.exitFile_Click);
             // 
             // Form1

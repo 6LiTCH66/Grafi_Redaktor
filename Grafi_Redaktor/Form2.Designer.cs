@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.Scroll_Red = new System.Windows.Forms.HScrollBar();
             this.Scroll_Green = new System.Windows.Forms.HScrollBar();
             this.Scroll_Blue = new System.Windows.Forms.HScrollBar();
@@ -182,6 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(690, 346);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -196,8 +198,9 @@
             this.Controls.Add(this.Scroll_Blue);
             this.Controls.Add(this.Scroll_Green);
             this.Controls.Add(this.Scroll_Red);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Color";
             ((System.ComponentModel.ISupportInitialize)(this.picture1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Red)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_Green)).EndInit();

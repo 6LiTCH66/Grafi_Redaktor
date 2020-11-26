@@ -39,7 +39,8 @@ namespace Grafi_Redaktor
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Images|*.png;*.bmp;*.jpg";
             ImageFormat format = ImageFormat.Png;
-            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
                 string ext = System.IO.Path.GetExtension(sfd.FileName);
                 switch (ext)
@@ -51,7 +52,17 @@ namespace Grafi_Redaktor
                         format = ImageFormat.Bmp;
                         break;
                 }
-                pictureBox1.Image.Save(sfd.FileName, format);
+
+                if(pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Save(sfd.FileName, format);
+                }
+                else
+                {
+                    MessageBox.Show("Can not save an empty file");
+                }
+
+
             }
         }
         void OpenFile()
@@ -68,17 +79,19 @@ namespace Grafi_Redaktor
             {
                 if (pictureBox1.Image != null)
                 {
-
+                    History.Clear();
+                    historyCounter = 0;
                     pictureBox1.Image = null;
 
                     Invalidate();
                 }
+                
             }
             else if (dr == DialogResult.Yes)
             {
                 SaveFile();
                 History.Clear();
-                historyCounter = 1;
+                historyCounter = 0;
                 Bitmap pic = new Bitmap(750, 500);
                 pictureBox1.Image = pic;
                 History.Add(new Bitmap(pictureBox1.Image));
@@ -138,7 +151,6 @@ namespace Grafi_Redaktor
                     {
                         mainPen.DashStyle = DashStyle.Solid;
                     }
-
                     g = Graphics.FromImage(pictureBox1.Image);
                     currentPath.AddLine(lastPoint, e.Location);
                     g.DrawPath(mainPen, currentPath);
@@ -153,23 +165,38 @@ namespace Grafi_Redaktor
         {
             
             lastPoint = Point.Empty;
-            History.Add(new Bitmap(pictureBox1.Image));
-            History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
-            
-            if (historyCounter + 1 < 10) historyCounter++;
-            if (History.Count - 1 == 10) History.RemoveAt(0);
-
-            isMouseDown = false;
-
-            try
+            if (pictureBox1.Image != null)
             {
-                currentPath.Dispose();
+                History.Add(new Bitmap(pictureBox1.Image));
+                History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
 
+                if (historyCounter + 1 < 10) historyCounter++;
+                if (History.Count - 1 == 10) History.RemoveAt(0);
+
+                isMouseDown = false;
+
+                try
+                {
+                    if(currentPath != null)
+                    {
+                        currentPath.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Try Again");
+                    }
+                }
+                catch
+                {
+                    
+                };
             }
-            catch
+            else
             {
-
-            };
+                MessageBox.Show("Your image is not supported by this redactor");
+                OpenFile();
+            }
+            
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -232,14 +259,22 @@ namespace Grafi_Redaktor
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(History.Count != 0 && historyCounter != 0)
+            if(pictureBox1.Image != null)
             {
-                pictureBox1.Image = new Bitmap(History[--historyCounter]);
+                if (History.Count != 0 && historyCounter != 0)
+                {
+                    pictureBox1.Image = new Bitmap(History[--historyCounter]);
+                }
+                else
+                {
+                    MessageBox.Show("История пуста");
+                }
             }
             else
             {
                 MessageBox.Show("История пуста");
             }
+            
             
         }
 
